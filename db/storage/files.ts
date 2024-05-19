@@ -10,7 +10,7 @@ export const uploadFile = async (
   }
 ) => {
   const SIZE_LIMIT = parseInt(
-    process.env.NEXT_PUBLIC_USER_FILE_SIZE_LIMIT || "10000000"
+    process.env.NEXT_PUBLIC_USER_FILE_SIZE_LIMIT || "30000000"
   )
 
   if (file.size > SIZE_LIMIT) {
@@ -19,7 +19,11 @@ export const uploadFile = async (
     )
   }
 
-  const filePath = `${payload.user_id}/${Buffer.from(payload.file_id).toString("base64")}`
+  // Generating a timestamp
+  const timestamp = new Date().getTime();
+
+  // Incorporating the timestamp into the filePath
+  const filePath = `${payload.user_id}/${timestamp}-${Buffer.from(payload.file_id).toString("base64")}`
 
   const { error } = await supabase.storage
     .from("files")
