@@ -4,6 +4,9 @@ import { Database } from "@/supabase/types"
 import { createClient } from "@supabase/supabase-js"
 import OpenAI from "openai"
 
+export const maxDuration = 60 // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic"
+
 export async function POST(request: Request) {
   const json = await request.json()
   const { userInput, fileIds, embeddingsProvider, sourceCount } = json as {

@@ -7,6 +7,9 @@ import { createClient } from "@supabase/supabase-js"
 import { NextResponse } from "next/server"
 import OpenAI from "openai"
 
+export const maxDuration = 60 // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic"
+
 export async function POST(req: Request) {
   const json = await req.json()
   const { text, fileId, embeddingsProvider, fileExtension } = json as {
