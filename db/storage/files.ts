@@ -19,11 +19,8 @@ export const uploadFile = async (
     )
   }
 
-  // Generating a timestamp
-  const timestamp = new Date().getTime();
-
   // Incorporating the timestamp into the filePath
-  const filePath = `${payload.user_id}/${timestamp}-${Buffer.from(payload.file_id).toString("base64")}`
+  const filePath = `${payload.user_id}/${Date.now()}`
 
   const { error } = await supabase.storage
     .from("files")
